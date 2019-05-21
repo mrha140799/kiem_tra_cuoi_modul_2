@@ -61,10 +61,15 @@ public class NhanVienController {
         return new ModelAndView("nhanvien/edit","nhanvien",nhanVienService.findeById(id));
     }
     @PostMapping(value = "/nhanvien/edit/done", params = "edit")
-    public String editAdd(@ModelAttribute("nhanvien")NhanVien nhanVien, RedirectAttributes redirect) {
+    public String editAdd(@Validated @ModelAttribute("nhanvien")NhanVien nhanVien, BindingResult bindingResult, RedirectAttributes redirect) {
+        new NhanVien().validate(nhanVien,bindingResult);
+        if (bindingResult.hasFieldErrors()){
+            return "redirect:/nhanvien/"+nhanVien.getId()+"/edit";
+        }else {
             nhanVienService.save(nhanVien);
-            redirect.addFlashAttribute("message","Edit successful!");
+            redirect.addFlashAttribute("message", "Edit successful!");
             return "redirect:/";
+        }
     }
     @PostMapping(value = "/nhanvien/edit/done", params = "cancle")
     public String editCancle() {
