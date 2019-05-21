@@ -23,12 +23,23 @@ public class NhanVien implements Validator{
     private boolean gioiTinh;
     @Size(min = 10, max = 10)
     private String sdt;
-    @Size(min = 13,max = 13)
+    @Size(min = 9,max = 13)
     private String cmnd;
-    @Pattern(regexp = "^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$")
+    @Pattern(regexp = "^[A-Za-z0-9]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$", message = "Incorrect!")
     private String email;
     @NotEmpty
     private String diaChi;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public String getCmnd() {
         return cmnd;

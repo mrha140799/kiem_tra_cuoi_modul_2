@@ -32,24 +32,23 @@
     </div>
     <table border="1">
         <tr>
+            <th>Mã Nhân Viên</th>
+            <th>Nhóm nhân viên</th>
             <th>Họ tên </th>
             <th>Giới tính </th>
             <th>Số điện thoại </th>
-            <th>Địa chỉ</th>
-            <th>Số chứng minh thư</th>
-            <th>Email</th>
+            <th>Chức năng</th>
         </tr>
         <th:block th:each="nv:${listNV}">
             <tr>
+                <td th:text="${nv.getId()}"></td>
+                <td th:text="${nv.getTeam().name}"></td>
                 <td th:text="${nv.hoTen}"></td>
                 <td>
                     <span th:if="${nv.gioiTinh}">Nam</span>
                     <span th:unless="${nv.gioiTinh}">Nữ</span>
                 </td>
                 <td th:text="${nv.sdt}"></td>
-                <td th:text="${nv.diaChi}"></td>
-                <td th:text="${nv.cmnd}"></td>
-                <td th:text="${nv.email}"></td>
                 <td> <a th:href="@{/nhanvien/{id}/edit(id=${nv.getId()})}"><img src="/i/edit.png" style="height: 20px;width: 20px"></a>&nbsp;|&nbsp;<a th:href="@{/nhanvien/{id}/delete(id=${nv.getId()})}"><img src="/i/delete.png" style="height: 20px;width: 20px" onclick="ketQua();"></a></td>
             </tr>
         </th:block>

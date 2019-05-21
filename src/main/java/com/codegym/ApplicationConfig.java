@@ -1,7 +1,9 @@
 package com.codegym;
 
 import com.codegym.service.NhanVienService;
+import com.codegym.service.TeamService;
 import com.codegym.service.impl.NhanVienServiceImpl;
+import com.codegym.service.impl.TeamServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -151,4 +153,8 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         return messageSource;
     }
 
+    @Bean
+    public TeamService teamService() {
+        return new TeamServiceImpl();
+    }
 }

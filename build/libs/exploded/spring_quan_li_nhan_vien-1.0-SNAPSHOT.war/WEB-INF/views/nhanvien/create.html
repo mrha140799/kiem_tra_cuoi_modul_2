@@ -10,7 +10,7 @@
 </th:block>
 <center>
     <h1>Thêm nhân viên</h1>
-    <div style="border: solid black;width: 350px" >
+    <div style="border: solid black;width: 550px" >
 <form action="#" th:action="@{/nhanvien/create/done}" method="post" th:object="${nhanvien}">
     <table>
         <tr>
@@ -22,14 +22,11 @@
             <td><label>Số điện thoại: </label></td>
             <td><input type="text" th:field="*{sdt}"></td>
             <td th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}"></td>
-
         </tr>
         <tr>
             <td><label>Số CMND: </label></td>
             <td><input type="text" th:field="*{cmnd}"></td>
             <td th:if="${#fields.hasErrors('cmnd')}" th:errors="*{cmnd}"></td>
-
-
         </tr>
         <tr>
             <td><label>Email: </label></td>
@@ -46,6 +43,14 @@
         <tr>
             <td><label>Tích nếu là Nam: </label></td>
             <td><input type="checkbox" th:field="*{gioiTinh}"></td>
+        </tr>
+        <tr>
+            <td>Nhóm</td>
+            <td>
+                <select th:field="*{team}">
+                    <option th:each="c:${teams}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td></td>

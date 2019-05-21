@@ -1,7 +1,9 @@
 package com.codegym.controllers;
 
 import com.codegym.model.NhanVien;
+import com.codegym.model.Team;
 import com.codegym.service.NhanVienService;
+import com.codegym.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -20,7 +22,12 @@ import java.util.List;
 public class NhanVienController {
     @Autowired
     private NhanVienService nhanVienService;
-
+    @Autowired
+    private TeamService teamService;
+    @ModelAttribute("teams")
+    public Iterable<Team> teams() {
+        return teamService.findAll();
+    }
     @GetMapping("/nhanvien/create")
     public ModelAndView createPage(){
         return new ModelAndView("nhanvien/create", "nhanvien",new NhanVien());
@@ -45,8 +52,6 @@ public class NhanVienController {
     }
 
 
-
-
     @GetMapping("/")
     public ModelAndView listPage(@PageableDefault(size = 2)Pageable pageable){
         return new ModelAndView("nhanvien/list","listNV",nhanVienService.findAll(pageable));
@@ -57,13 +62,9 @@ public class NhanVienController {
     }
     @PostMapping(value = "/nhanvien/edit/done", params = "edit")
     public String editAdd(@ModelAttribute("nhanvien")NhanVien nhanVien, RedirectAttributes redirect) {
-        if (nhanVien.getHoTen().equals("")){
-            redirect.addFlashAttribute( "message","Edit false!");
-        }else {
             nhanVienService.save(nhanVien);
             redirect.addFlashAttribute("message","Edit successful!");
-        }
-        return "redirect:/";
+            return "redirect:/";
     }
     @PostMapping(value = "/nhanvien/edit/done", params = "cancle")
     public String editCancle() {

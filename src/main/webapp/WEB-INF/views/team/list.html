@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<h1>List Category</h1>
+<p>
+    <a th:href="@{/team/create}" style="text-decoration: none;color: #ff1760;">Tạo team</a>
+</p>
+<p>
+    <a th:href="@{/}" style="text-decoration: none;color: #ff1760;"> list Nhân viên</a>
+</p>
+<th:block th:if="${message}"><p th:text="${message}"></p></th:block>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="c:${teams}">
+
+    <tr>
+            <td th:text="${c.name}"></td>
+            <td><a th:href="@{/team/{id}/edit(id=${c.getId()})}" style="text-decoration: none; color: #ff1760">Edit</a></td>
+            <td><a th:href="@{/team/{id}/delete(id=${c.getId()})}" style="text-decoration: none; color: #ff1760">Delete</a></td>
+            <td th:hidden="${c.id}"></td>
+    </tr>
+    </th:block>
+
+</table>
+
+</body>
+</html>
