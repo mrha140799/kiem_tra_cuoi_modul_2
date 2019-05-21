@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<center>
+    <h1>Sửa thông tin nhân viên</h1>
+    <div style="border: solid black;width: 350px" >
+        <form th:action="@{/nhanvien/edit/done}" method="post" th:object="${nhanvien}">
+            <input type="hidden" th:field="*{id}">
+            <table>
+                <tr>
+                    <td><label>Họ và tên: </label></td>
+                    <td><input type="text" th:field="*{hoTen}" th:value="${nhanvien.hoTen}"></td>
+                </tr>
+                <tr>
+                    <td><label>Số điện thoại: </label></td>
+                    <td><input type="text" th:field="*{sdt}" th:value="${nhanvien.sdt}"></td>
+                </tr>
+                <tr>
+                    <td><label>Số CMND: </label></td>
+                    <td><input type="text" th:field="*{cmnd}" th:value="${nhanvien.cmnd}"></td>
+                </tr>
+                <tr>
+                    <td><label>Email: </label></td>
+                    <td><input type="text" th:field="*{email}" th:value="${nhanvien.email}"></td>
+                </tr>
+                <tr>
+                    <td><label>Địa chỉ: </label></td>
+                    <td><input type="text" th:field="*{diaChi}" th:value="${nhanvien.diaChi}"></td>
+                </tr>
+                <tr>
+                    <td><label>Tích nếu là Nam: </label></td>
+                    <td><input type="checkbox" th:field="*{gioiTinh}" th:value="${nhanvien.gioiTinh}"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div>
+                            <input type="submit" value="Hủy" name="cancle">
+                            <input type="submit" value="Sửa" name="edit" style="margin-left: 30px">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</center>
+</body>
+</html>

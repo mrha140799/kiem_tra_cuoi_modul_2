@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        th{
+            background-color: rgba(203, 203, 203, 0.96);
+        }
+
+    </style>
+</head>
+<body>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<center>
+    <h1>Danh sách nhân viên</h1>
+    <p>
+        <a th:href="@{/nhanvien/create}" style="text-decoration: none">Thêm Nhân viên</a>
+    </p>
+    <div>
+        <form th:action="@{/nhanvien/search}" method="post">
+            <table>
+                <tr>
+                    <td><input type="text" name="strName" placeholder="TÊN"></td>
+                    <td><input type="submit" value="search"></td>
+
+                </tr>
+            </table>
+        </form>
+    </div>
+    <table border="1">
+        <tr>
+            <th>Họ tên </th>
+            <th>Giới tính </th>
+            <th>Số điện thoại </th>
+            <th>Địa chỉ</th>
+            <th>Số chứng minh thư</th>
+            <th>Email</th>
+        </tr>
+        <th:block th:each="nv:${listNV}">
+            <tr>
+                <td th:text="${nv.hoTen}"></td>
+                <td>
+                    <span th:if="${nv.gioiTinh}">Nam</span>
+                    <span th:unless="${nv.gioiTinh}">Nữ</span>
+                </td>
+                <td th:text="${nv.sdt}"></td>
+                <td th:text="${nv.diaChi}"></td>
+                <td th:text="${nv.cmnd}"></td>
+                <td th:text="${nv.email}"></td>
+                <td> <a th:href="@{/nhanvien/{id}/edit(id=${nv.getId()})}"><img src="/i/edit.png" style="height: 20px;width: 20px"></a>&nbsp;|&nbsp;<a th:href="@{/nhanvien/{id}/delete(id=${nv.getId()})}"><img src="/i/delete.png" style="height: 20px;width: 20px" onclick="ketQua();"></a></td>
+            </tr>
+        </th:block>
+    </table>
+    <div>
+        <a th:href="@{'/'(page=${listNV.number - 1})}" th:if="${listNV.hasPrevious()}">Previous</a>
+        <span th:text="${listNV.number + 1}"></span>/<span th:text="${listNV.totalPages}"></span>
+        <a th:href="@{'/'(page=${listNV.number + 1})}" th:if="${listNV.hasNext()}">Next</a>
+    </div>
+</center>
+<script>
+    function ketQua() {
+        alert("Delete Successful!");
+
+    }
+</script>
+</body>
+</html>
